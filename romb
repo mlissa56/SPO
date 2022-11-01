@@ -1,0 +1,37 @@
+#!/bin/bash
+
+read -p "Length of romb: " length
+
+if ! [[ $length =~ ^[0-9]+$ ]]; then
+ echo "Value of romb mememe"
+ exit 1
+fi
+
+#first side
+
+num=1
+for ((i=0; i<$length; i++)); do
+  for ((j=0; j<(($length-num)); j++)); do
+    echo -n " "
+  done
+  for ((k=0;k<$num;k++)); do
+    echo -n "* "
+  done
+echo ""
+
+part1=$(($num+1))
+done
+
+#second side
+num2=length-1
+for ((i=0;i<=(($length-1));i++)); do
+  for ((j=0;j<(($length-num2));j++)); do
+    echo -n " "
+  done
+  for ((k=0;k<num2;k++)); do
+    echo -n "* "
+  done
+echo ""
+num2=$(($part2-1))
+done
+exit 0
