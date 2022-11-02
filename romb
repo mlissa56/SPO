@@ -1,7 +1,6 @@
 #!/bin/bash
 
 read -p "Length of romb: " length
-
 if ! [[ $length =~ ^[0-9]+$ ]]; then
  echo "Number is incorrect"
  exit 1
@@ -9,29 +8,26 @@ fi
 
 #first side
 
-let num=$(($length-1))
-
-for ((i=0; i<$length; i++)); do
-  for ((j=0; j<$(($length-1)); j++)); do
-    echo -n " "
+for ((i=1; i<=(($length-1)); i++)); do
+  for ((j=1; j<=$length; j++)); do
+      if (($(($length-$i)) < $j)); then
+          echo -n " *"
+      else
+          echo -n " "
+      fi
   done
-  for ((j=0;j<$num;j++)); do
-    echo -n "* "
-  done
-echo ""
-
-num=$(($num+1))
+  echo ""
 done
 
 #second side
-for ((i=0;i<=$(($length-1));i++)); do
-  for ((j=0;j<$(($length-$num));j++)); do
-    echo -n " "
+for ((i=1; i<=$length; i++)); do
+  for ((j=0; j<=$length; j++)); do
+      if (($(($length-$i)) >= $(($length-$j)) )); then
+          echo -n "* "
+      else
+          echo -n " "
+      fi
   done
-  for ((j=0;j<num;j++)); do
-    echo -n "* "
-  done
-echo ""
-num=$(($num-1))
-done
+  echo ""
+done 
 exit 0
