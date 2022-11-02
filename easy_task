@@ -1,0 +1,9 @@
+#!/bin/bash
+
+read -p "Number of chairs: " number
+
+for ((i=2; $number>i; i++)); do
+  echo "last chair: " $((number-1))
+  exit 1
+done
+exit 0
