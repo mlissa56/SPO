@@ -1,0 +1,29 @@
+#!/bin/bash
+
+value= read -p "Enter: " value
+
+while read -n 1 val; do
+  arr+=($val)
+done <<< $value
+
+for(( i = 0; i < ${#arr[@]}; i++ )); do
+    cod=$(echo "obase=2; ${arr[$i]}" | bc)
+    while read -n 1 val; do
+      arr_code+=($val)
+    done <<< "$cod"
+    length=${#bin_arr[@]}
+    for (( j=0; j < $(($length - 1)); j++ )); do
+      echo -n "0"
+    done
+    echo -n "1"
+    echo -n "$cod"
+    unset cod arr_code length
+  done
+echo
+
+for(( i = 0; i < ${#arr[@]}; i++ )); do
+  echo ${arr[@]}
+  i=$(($i + 1))
+  dec=$(echo "ibase=2; $cod${arr[$i]}" | bc)
+done
+exit 0
