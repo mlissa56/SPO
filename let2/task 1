@@ -1,8 +1,5 @@
 #!/bin/bash
-if [ $# -eq 0 ]; then
-        echo "enter something"
-exit 1
-fi
+
 for word in $@;
 do
     rev="$word $rev"
