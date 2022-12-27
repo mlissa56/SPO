@@ -1,0 +1,51 @@
+#!/bin/bash
+
+while read -n 1 c; do
+  number+=("$c")
+done <<<$1
+
+min=${number[0]}
+max=${number[0]}
+
+min_index=0
+max_index=0
+
+count=0
+
+for (( i = 1; i < $((${#number[@]} - 1 )); i++)); do
+  if (( ${number[$i]} < $min )); then
+    min=${number[$i]}
+    min_index=$i
+  fi
+  if (( ${number[$i]} > $max )); then
+    max=${number[$i]}
+    max_index=$i
+  fi
+  if (( ${number[$i]} == 0 )); then
+    count=$(( $count + 1 ))
+  fi
+done
+
+if (( $count == $((${#number[@]} - 2)) )); then
+    for (( i = 0; i < ${#number[@]}; i++ )); do
+        result=${number[$i]}
+        min_res=$(( ${#number[@]} - 1 ))
+    done
+    result="[$result$max, $max_index, $min_res]"
+else
+  result=$min
+  for (( i = 0; i < ${#number[@]}; i++ )); do
+    if (( $i == $min_index)); then
+      continue
+      fi
+      num=${number[$i]}
+      result=$result$num
+  done
+
+result="[$result, $min_index, 0]"
+fi
+
+echo "smallest($1) -> ${result}"
+
+exit 0
+
